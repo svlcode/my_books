@@ -11,7 +11,15 @@
   <body>
     <div id="app">
       <label for="txtSearch">Search:</label>
-      <input id="txtSearch" type="text" v-model="searchValue" />
+      <input
+        id="txtSearch"
+        type="text"
+        placeholder="type here"
+        v-model="searchValue"
+      />
+      <select v-model="selectedField">
+        <option v-for="searchField of searchFields">{{ searchField }}</option>
+      </select>
       <table class="my-table">
         <thead>
           <tr>
