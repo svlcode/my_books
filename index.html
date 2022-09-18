@@ -6,40 +6,71 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>My Books</title>
     <script src="vue.js"></script>
+    <link
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
+      rel="stylesheet"
+      type="text/css"
+    />
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <div id="app">
-      <label for="txtSearch">Search:</label>
-      <input
-        id="txtSearch"
-        type="text"
-        placeholder="type here"
-        v-model="searchValue"
-      />
-      <select v-model="selectedField">
-        <option v-for="searchField of searchFields">{{ searchField }}</option>
-      </select>
-      <table class="my-table">
-        <thead>
-          <tr>
-            <th>Title</th>
-            <th>Author</th>
-            <th>Year</th>
-            <th>Read on</th>
-            <th>Notes</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="book in searchBooks" :key="book.title">
-            <td>{{book.title}}</td>
-            <td>{{book.author}}</td>
-            <td>{{book.year}}</td>
-            <td>{{book.readOn}}</td>
-            <td>{{book.notes}}</td>
-          </tr>
-        </tbody>
-      </table>
+    <div id="app" class="container" @click="isActive = false">
+      <div class="row">
+        <div class="input-group col-md-6 m-3">
+          <!-- <label for="txtSearch">Search:</label> -->
+          <input
+            class="form-control"
+            id="txtSearch"
+            type="text"
+            placeholder="Search for..."
+            v-model="searchValue"
+          />
+          <!-- <select v-model="selectedField" class="form-control">
+          <option v-for="searchField of searchFields">{{ searchField }}</option>
+        </select> -->
+          <div class="input-group-btn" :class="{open: isActive}">
+            <button
+              type="button"
+              class="btn btn-default dropdown-toggle open"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="true"
+              @click.stop="activateDropdown"
+            >
+              {{selectedField}} <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu dropdown-menu-right">
+              <li v-for="searchField of searchFields">
+                <a @click="selectFilter(searchField)">{{searchField}}</a>
+              </li>
+            </ul>
+          </div>
+          <!-- /btn-group -->
+        </div>
+      </div>
+
+      <div class="row">
+        <table class="table table-hover col-md-12">
+          <thead>
+            <tr>
+              <th>Title</th>
+              <th>Author</th>
+              <th>Year</th>
+              <th>Read on</th>
+              <th>Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="book in searchBooks" :key="book.title">
+              <td>{{book.title}}</td>
+              <td>{{book.author}}</td>
+              <td>{{book.year}}</td>
+              <td>{{book.readOn}}</td>
+              <td>{{book.notes}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
     <script src="app.js"></script>
   </body>

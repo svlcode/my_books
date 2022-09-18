@@ -27,6 +27,7 @@ new Vue({
     searchValue: '',
     searchFields: ['title', 'author', 'year'],
     selectedField: 'title',
+    isActive: false,
   },
   computed: {
     searchBooks() {
@@ -38,5 +39,12 @@ new Vue({
       return this.books;
     },
   },
-  methods: {},
+  methods: {
+    activateDropdown() {
+      this.isActive = !this.isActive;
+    },
+    selectFilter(fieldName) {
+      this.selectedField = fieldName;
+    }
+  },
 });
